@@ -17,16 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory app:title="@string/preferences_general_title">
-        <ListPreference
-            app:key="pref_theme"
-            app:title="@string/preferences_theme"
-            app:entries="@array/pref_theme_entries"
-            app:entryValues="@array/pref_theme_values"
-            app:defaultValue="light" />
-        <SwitchPreference
-            app:key="pref_pure_black_night_mode"
-            app:defaultValue="false"
-            app:title="@string/preferences_pure_black_night_mode" />
         <Preference
             app:key="pref_color"
             app:title="@string/preferences_color"
