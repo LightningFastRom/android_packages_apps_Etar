@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Color;
@@ -197,7 +198,24 @@ public class Utils {
     public static boolean isOreoOrLater() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
-
+	
+	/**
+     * Returns whether dark or light theme is select or both theme if the user has auto dark mode enabled.
+     */
+	public static String getCurrentSystemTheme(Context context) {
+		int currentNightMode = context.getResources().getConfiguration().uiMode
+		        & Configuration.UI_MODE_NIGHT_MASK;
+		switch (currentNightMode) {
+		    case Configuration.UI_MODE_NIGHT_YES:
+		        return "dark";
+		    case Configuration.UI_MODE_NIGHT_NO:
+		        return"light";
+			case Configuration.UI_MODE_NIGHT_UNDEFINED:
+				return "light";
+		}
+		return "light";
+    }
+	
     public static int getViewTypeFromIntentAndSharedPref(Activity activity) {
         Intent intent = activity.getIntent();
         Bundle extras = intent.getExtras();

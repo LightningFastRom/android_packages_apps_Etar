@@ -47,7 +47,7 @@ public class DynamicTheme {
     }
 
     private static String getTheme(Context context) {
-        return Utils.getSharedPreference(context, THEME_PREF, systemThemeAvailable() ? SYSTEM : LIGHT);
+		return Utils.getCurrentSystemTheme(context);
     }
 
     private static int getSelectedTheme(Activity activity) {
