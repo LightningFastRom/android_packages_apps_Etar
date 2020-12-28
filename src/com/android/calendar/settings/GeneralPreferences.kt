@@ -51,6 +51,7 @@ class GeneralPreferences : PreferenceFragmentCompat(),
         TimeZonePickerDialogX.OnTimeZoneSetListener {
 
     private lateinit var colorPref: Preference
+    private lateinit var pureBlackNightModePref: SwitchPreference
     private lateinit var defaultStartPref: ListPreference
     private lateinit var hideDeclinedPref: CheckBoxPreference
     private lateinit var weekStartPref: ListPreference
@@ -92,6 +93,7 @@ class GeneralPreferences : PreferenceFragmentCompat(),
         super.onCreate(savedInstanceState)
 
         colorPref = preferenceScreen.findPreference(KEY_COLOR_PREF)!!
+        pureBlackNightModePref = preferenceScreen.findPreference(KEY_PURE_BLACK_NIGHT_MODE)!!
         defaultStartPref = preferenceScreen.findPreference(KEY_DEFAULT_START)!!
         hideDeclinedPref = preferenceScreen.findPreference(KEY_HIDE_DECLINED)!!
         weekStartPref = preferenceScreen.findPreference(KEY_WEEK_START_DAY)!!
@@ -240,6 +242,7 @@ class GeneralPreferences : PreferenceFragmentCompat(),
      */
     private fun setPreferenceListeners(listener: Preference.OnPreferenceChangeListener) {
         colorPref.onPreferenceChangeListener = listener
+        pureBlackNightModePref.onPreferenceChangeListener = listener
         defaultStartPref.onPreferenceChangeListener = listener
         hideDeclinedPref.onPreferenceChangeListener = listener
         weekStartPref.onPreferenceChangeListener = listener
@@ -277,6 +280,10 @@ class GeneralPreferences : PreferenceFragmentCompat(),
                 a.sendBroadcast(intent)
             }
             KEY_COLOR_PREF -> a.recreate()
+        }
+        //pureBlackNightMode refresh condition
+        if (themePref.value == "system" && DynamicTheme.isSystemInDarkTheme(a)) {
+            a.recreate()
         }
     }
 
@@ -472,6 +479,7 @@ class GeneralPreferences : PreferenceFragmentCompat(),
     companion object {
         // Preference keys
         const val KEY_COLOR_PREF = "pref_color"
+        const val KEY_PURE_BLACK_NIGHT_MODE = "pref_pure_black_night_mode"
         const val KEY_DEFAULT_START = "preferences_default_start"
         const val KEY_HIDE_DECLINED = "preferences_hide_declined"
         const val KEY_WEEK_START_DAY = "preferences_week_start_day"
