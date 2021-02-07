@@ -51,7 +51,6 @@ class GeneralPreferences : PreferenceFragmentCompat(),
         TimeZonePickerDialogX.OnTimeZoneSetListener {
 
     private lateinit var colorPref: Preference
-    private lateinit var pureBlackNightModePref: SwitchPreference
     private lateinit var defaultStartPref: ListPreference
     private lateinit var hideDeclinedPref: CheckBoxPreference
     private lateinit var weekStartPref: ListPreference
@@ -93,7 +92,6 @@ class GeneralPreferences : PreferenceFragmentCompat(),
         super.onCreate(savedInstanceState)
 
         colorPref = preferenceScreen.findPreference(KEY_COLOR_PREF)!!
-        pureBlackNightModePref = preferenceScreen.findPreference(KEY_PURE_BLACK_NIGHT_MODE)!!
         defaultStartPref = preferenceScreen.findPreference(KEY_DEFAULT_START)!!
         hideDeclinedPref = preferenceScreen.findPreference(KEY_HIDE_DECLINED)!!
         weekStartPref = preferenceScreen.findPreference(KEY_WEEK_START_DAY)!!
@@ -109,7 +107,7 @@ class GeneralPreferences : PreferenceFragmentCompat(),
 
         val prefs = CalendarUtils.getSharedPreferences(activity!!,
                 Utils.SHARED_PREFS_NAME)
-	
+    
         if (Utils.isOreoOrLater()) {
             notificationPref = preferenceScreen.findPreference(KEY_NOTIFICATION)!!
         } else {
@@ -242,7 +240,6 @@ class GeneralPreferences : PreferenceFragmentCompat(),
      */
     private fun setPreferenceListeners(listener: Preference.OnPreferenceChangeListener) {
         colorPref.onPreferenceChangeListener = listener
-        pureBlackNightModePref.onPreferenceChangeListener = listener
         defaultStartPref.onPreferenceChangeListener = listener
         hideDeclinedPref.onPreferenceChangeListener = listener
         weekStartPref.onPreferenceChangeListener = listener
